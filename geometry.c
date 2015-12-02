@@ -36,6 +36,30 @@ double coord_2d_dist(const coord_2d_t* a, const coord_2d_t* b){
 
 }
 
+double coord_2d_area_triangle(const coord_2d_t* a, const coord_2d_t* b, const coord_2d_t* c){
+    /* Input Checks */
+    if(!a){
+        DEBUG(__FILE__, __LINE__, __func__, "'a' must not be NULL");
+        return NAN;
+    }
+    if(!b){
+        DEBUG(__FILE__, __LINE__, __func__, "'b' must not be NULL");
+        return NAN;
+    }
+    if(!c){
+        DEBUG(__FILE__, __LINE__, __func__, "'c' must not be NULL");
+        return NAN;
+    }
+
+	/* Maths */
+	double donut = (a->x * (b->y - c->y));
+	double jellydonut = (b->x * (c->y - a->y));
+	double bagel = (c->x * (a->y - b->y));
+	double withOurPowersCombined = fabs((donut + jellydonut + bagel)/2);
+	return withOurPowersCombined;
+
+}
+
 bool coord_2d_eq(const coord_2d_t* a, const coord_2d_t* b){
 
     /* Equal if dist <= FUZZY_EQ */
